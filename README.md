@@ -1,4 +1,7 @@
-jumpstarter-php-util
+jumpstarter-php-library
 ====================
 
-Jumpstarter.io library for PHP
+PHP library for jumpstarter that makes integration with Jumpstarter much easier and provide mock fallback for production factors
+when testing locally.
+
+By Alexander Forselius <alex@artistconnctor.com>
