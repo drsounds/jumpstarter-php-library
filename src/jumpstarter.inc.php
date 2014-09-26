@@ -20,13 +20,13 @@ class Jumpstarter extends SQLite3 {
     	if ($this->isProduction()) {
     		
 			// Check if the database exists or create it.
-			$database_path = $this->getStateDirectory() . $name . '.sqlite';
+			$database_path = $this->getStateDirectory() . DIRECTORY_SEPARATOR . $name . '.sqlite';
     		if (file_exists($database_path)) {
     			// Open as usual
 	    	 	$this->open($database_path);
 			} else {
 				// Create new production database
-    	 		copy($this->getAppDirectory() . $name . DIRECTORY_SEPARATOR . $name . '.sqlite', $database_path);
+    	 		copy($this->getAppDirectory() . DIRECTORY_SEPARATOR . $name . DIRECTORY_SEPARATOR . $name . '.sqlite', $database_path);
 				// Clean tables from test data
 				$this->open($database_path);
 			}		
@@ -45,7 +45,7 @@ class Jumpstarter extends SQLite3 {
 	
 	public function getStateDirectory() {
 		if ($this->isProduction()) {
-			return $thi->getAppDirectory() . "state/";
+			return $thi->getAppDirectory() . DIRECTORY_SEPARATOR . "state";
 		}
 	}
 	
@@ -56,7 +56,7 @@ class Jumpstarter extends SQLite3 {
 	public function getAppDirectory($development_path = '') {
 		if ($this->isProduction()) {
 			// We are in production environment
-			return "/app";
+			return DIRECTORY_SEPARATOR . "app";
 		} else {
 			return $development_path;
 		}
@@ -64,7 +64,7 @@ class Jumpstarter extends SQLite3 {
 	
 	public function initSessions() {
 		if ($this->isProduction()) {
-			$session_dir = $this->getStateDirectory() . "/session";
+			$session_dir = $this->getStateDirectory() . DIRECTORY_SEPARATOR . "session";
 			if (!is_dir($session_dir)) {
 				mkdir($session_dir);
 			}
@@ -99,7 +99,7 @@ class Jumpstarter extends SQLite3 {
 	 * Loads /app/state/env.json into memory and returns it as JSON
 	 */
 	public function loadEnvConfig() {
-		$file = $this->loadFile('/env.json');
+		$file = $this->loadFile(DIRECTORY_SEPARATOR . 'env.json');
 		$data = json_decode($file, TRUE);
 		return $data;
 	}
