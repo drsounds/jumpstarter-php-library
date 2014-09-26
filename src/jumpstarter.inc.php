@@ -104,8 +104,8 @@ class Jumpstarter extends SQLite3 {
 		return $data;
 	}
 	
-	public function loadSettings() {
+	public function loadAppSettings() {
 		$envjson = $this->loadEnvConfig();
-		return $envjson['app']['settings'];
+		return $envjson['settings']['app'];
 	}
 }
